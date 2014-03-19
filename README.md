@@ -38,6 +38,17 @@ This sets up a simple state machine that lets a sphere rotate clockwise, counter
 Features demonstrated:
 * Finite State Machine
 
+geometry
+--------
+
+Here I show how to create geometry in Python code. The peed bottleneck here is how fast the CPU can crunch through the code to generate the data. 900 vertices / 1682 triangles each frame drop the framerate to just above 20 for me. In normal applications, recreating the whole mesh either isn't done each frame, or is done in geometry shaders.
+
+I create two heightmaps consisting of white noise only, and interpolate them based on time, one second for a full blendover. After a full blend, I set a new heightmap to blend to.
+
+Features demonstrated:
+* Creating Geoms / GeomNodes from scratch
+* Writing (and, in comments, reading) vertex data
+
 GUI
 ---
 
