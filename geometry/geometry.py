@@ -16,6 +16,7 @@ class BrownianBlender(ShowBase):
         # Basics
         ShowBase.__init__(self)
         base.disableMouse()
+        base.setFrameRateMeter(True)
         self.accept("escape", sys.exit)
         self.camera.set_pos(-10, -10, 10)
         self.camera.look_at(0, 0, 0)
@@ -26,7 +27,7 @@ class BrownianBlender(ShowBase):
         plnp.setPos(10, 10, 10)
         render.setLight(plnp)
         # Create the geometry
-        self.sidelength = 10
+        self.sidelength = 30
         self.map_a = self.create_map(self.sidelength)
         self.map_b = self.map_a
         geom = self.create_geom(self.sidelength)
