@@ -61,20 +61,31 @@ class BrownianBlender(ShowBase):
         # Add triangles
         for x in range(0, sidelength - 1):
             for y in range(0, sidelength - 1):
+                # The vertex arrangement (y up, x right)
                 # 2 3
                 # 0 1
                 v_0 = x * sidelength + y
                 v_1 = x * sidelength + (y + 1)
                 v_2 = (x + 1) * sidelength + y
                 v_3 = (x + 1) * sidelength + (y + 1)
-                tris = GeomTriangles(Geom.UHStatic)
-                tris.addVertices(v_0, v_2, v_3)
-                tris.closePrimitive()
-                geom.addPrimitive(tris)
-                tris = GeomTriangles(Geom.UHStatic)
-                tris.addVertices(v_3, v_1, v_0)
-                tris.closePrimitive()
-                geom.addPrimitive(tris)
+                if (x+y)%1 == 0: # An even square
+                    tris = GeomTriangles(Geom.UHStatic)
+                    tris.addVertices(v_0, v_2, v_3)
+                    tris.closePrimitive()
+                    geom.addPrimitive(tris)
+                    tris = GeomTriangles(Geom.UHStatic)
+                    tris.addVertices(v_3, v_1, v_0)
+                    tris.closePrimitive()
+                    geom.addPrimitive(tris)
+                else: # An odd square
+                    tris = GeomTriangles(Geom.UHStatic)
+                    tris.addVertices(v_1, v_0, v_2)
+                    tris.closePrimitive()
+                    geom.addPrimitive(tris)
+                    tris = GeomTriangles(Geom.UHStatic)
+                    tris.addVertices(v_2, v_3, v_1)
+                    tris.closePrimitive()
+                    geom.addPrimitive(tris)
 
         # Create the actual node
         node = GeomNode('geom_node')
