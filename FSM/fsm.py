@@ -42,7 +42,7 @@ class MyApp(ShowBase):
     def set_rotation(self, rotation):
         self.rotation = rotation
     def rotate(self, task):
-        self.model.set_h(self.model.get_h() + self.rotation * task.getDt() * 360.0)
+        self.model.set_h(self.model.get_h() + self.rotation * task.getDt() * 60)
         return Task.cont
 
 class RotationState(FSM):
