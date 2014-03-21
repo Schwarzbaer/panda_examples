@@ -57,6 +57,14 @@ Okay, it *does* get a bit ridiculous here. All I did here was plaster a button o
 Features demonstrated:
 * DirectGUI elements
 
+lod
+---
+
+Level of detail. I created a model of a tree on tree different detail levels and you're allowed to laugh, but even for programmers art I did them quarter-assed. Anyways, your up and down cursor keys will move you towards and away from the tree, showing how the mesh gets exchanged automagically.
+
+Features demonstrated:
+* Level of Detail nodes
+
 render\_to\_texture
 -------------------
 
