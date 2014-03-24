@@ -11,14 +11,17 @@ class GUI(ShowBase):
         base.disableMouse()
         self.accept("escape", sys.exit)
 
+        # Loading a font
         LoadFontFace("./gnu-freefont_freesans/FreeSans.ttf")
 
+        # Creating all necessary context
         self.region = RocketRegion.make('pandaRocket', base.win)
         self.region.setActive(1)
         self.region.initDebugger()
         self.region.setDebuggerVisible(False)
         self.context = self.region.getContext()
 
+        # Loading documents
         self.documents = {}
         self.documents['main'] = self.context.LoadDocument('./demo.rml')
         # .Show() to display document, .Hide() to hide.

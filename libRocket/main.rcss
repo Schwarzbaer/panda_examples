@@ -1,0 +1,15 @@
+.main {
+    font-family: FreeSans;
+    font-size: 200%;
+    position: absolute;
+    background-color: #333333;
+    border-width: 3px;
+    border-color: #999999;
+    margin-left: 20%;
+    margin-right: 20%;
+    text-align: center;
+}
+
+.buttonDemo {
+    font-family: FreeSans;
+}
