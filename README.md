@@ -57,6 +57,16 @@ Okay, it *does* get a bit ridiculous here. All I did here was plaster a button o
 Features demonstrated:
 * DirectGUI elements
 
+libRocket
+---------
+
+A minimal libRocket GUI
+
+Features demonstrated:
+* Loading a font
+* Setting up the Python-side of the GUI
+* RML / RCSS
+
 lod
 ---
 
