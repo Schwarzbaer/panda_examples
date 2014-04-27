@@ -1,0 +1,84 @@
+<CoordinateSystem> { Z-Up }
+
+<Comment> {
+  "egg-trans -tbnall -o /home/baribal/src/panda_examples/shape_keys/box.egg /home/baribal/src/panda_examples/shape_keys/box.egg"
+}
+<Material> Material {
+  <Scalar> diffr { 0.64 }
+  <Scalar> diffg { 0.64 }
+  <Scalar> diffb { 0.64 }
+  <Scalar> emitr { 0 }
+  <Scalar> emitg { 0 }
+  <Scalar> emitb { 0 }
+  <Scalar> specr { 0.5 }
+  <Scalar> specg { 0.5 }
+  <Scalar> specb { 0.5 }
+  <Scalar> shininess { 12.5 }
+}
+<Group> Cube {
+  <Dart> { 1 }
+  <VertexPool> Cube {
+    <Vertex> 0 {
+      1 1 -1
+      <Dxyz> Key2 { -0.5 -0.5 0 }
+    }
+    <Vertex> 1 {
+      1 -1 -1
+      <Dxyz> Key2 { -0.5 0.5 0 }
+    }
+    <Vertex> 2 {
+      -1 -1 -1
+      <Dxyz> Key2 { 0.5 0.5 0 }
+    }
+    <Vertex> 3 {
+      -1 1 -1
+      <Dxyz> Key2 { 0.5 -0.5 0 }
+    }
+    <Vertex> 4 {
+      1 0.999999 1
+      <Dxyz> Key1 { -0.5 -0.5 0 }
+    }
+    <Vertex> 5 {
+      -1 1 1
+      <Dxyz> Key1 { 0.5 -0.5 0 }
+    }
+    <Vertex> 6 {
+      -1 -1 1
+      <Dxyz> Key1 { 0.5 0.5 0 }
+    }
+    <Vertex> 7 {
+      0.999999 -1 1
+      <Dxyz> Key1 { -0.5 0.5 0 }
+    }
+  }
+  <Polygon> {
+    <Normal> { 0 0 -1 }
+    <MRef> { Material }
+    <VertexRef> { 0 1 2 3 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 0 1 }
+    <MRef> { Material }
+    <VertexRef> { 4 5 6 7 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 1 0 0 }
+    <MRef> { Material }
+    <VertexRef> { 0 4 7 1 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 -1 0 }
+    <MRef> { Material }
+    <VertexRef> { 1 7 6 2 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { -1 0 0 }
+    <MRef> { Material }
+    <VertexRef> { 2 6 5 3 <Ref> { Cube } }
+  }
+  <Polygon> {
+    <Normal> { 0 1 0 }
+    <MRef> { Material }
+    <VertexRef> { 4 0 3 5 <Ref> { Cube } }
+  }
+}
