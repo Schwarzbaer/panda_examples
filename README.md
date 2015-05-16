@@ -14,6 +14,17 @@ Features demonstrated:
 * Tasks
 * Moving a node
 
+3d-sound
+--------
+
+Have an object in the scene emit a sound which is then rendered appropriately.
+
+Features demonstrated:
+* 3D sound
+
+Features not yet demonstrated:
+* Doppler shift
+
 bullet\_physics
 ---------------
 
