@@ -19,6 +19,8 @@ Features demonstrated:
 
 Have an object in the scene emit a sound which is then rendered appropriately.
 
+This example uses a sound file downloaded at http://www.freesound.org/people/lth_stp/sounds/120490/ created by the sound department of the states theater of Lower Austria (Landestheater Niederösterreich). I have dropped an audio channel (the original is stereo, this version is mono) and converted it to Ogg Vorbis. The file is licensed under the Creative Commons 3.0 license, Attribution-NonCommercial: http://creativecommons.org/licenses/by-nc/3.0/
+
 Features demonstrated:
 * 3D sound
 
