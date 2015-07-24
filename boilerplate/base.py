@@ -7,7 +7,7 @@ from direct.showbase.ShowBase import ShowBase
 from panda3d.core import PStatClient
 from direct.task import Task
 
-class Boilerplate(ShowBase):
+class Base(ShowBase):
     def __init__(self):
         # The basics
         ShowBase.__init__(self)
@@ -50,6 +50,6 @@ class Boilerplate(ShowBase):
         return Task.cont
 
 if __name__ == '__main__':
-    app = Boilerplate()
+    app = Base()
     app.run()
 
