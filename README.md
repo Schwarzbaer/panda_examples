@@ -115,3 +115,17 @@ A bunch of spheres in the scene show that the skybox gets rendered "behind" obje
 
 Features demonstrated:
 * Rendering objects as background
+
+filter
+------
+
+Featured demonstrated:
+* Post-processing effects with fragment shaders
+
+This is mostly a copy-and-paste job of the Hello World application in Panda3D's manual, with a filter slapped on at the end. The FilterManager causes a scene to not be rendered directly to the scene, but instead to textures on a quad, which then does get fed back into fragment shading.
+
+boilerplate
+-----------
+
+This is code I find helpful when developing experiments with.
+
