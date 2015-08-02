@@ -39,7 +39,7 @@ class ShaderBase(Base):
         node.addGeom(geom)
         np = NodePath(node)
         # Shader and initial shader vars
-        np.set_shader(Shader.load(Shader.SL_GLSL, "shader/vertex.glsl", "shader/fragment.glsl"))
+        np.set_shader(Shader.load(Shader.SL_GLSL, "shader/shader.vert", "shader/shader.frag"))
         np.set_shader_input("time", 0.0)
         # No instancing necessary
         #np.set_instance_count(27)
