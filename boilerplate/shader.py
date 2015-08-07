@@ -50,9 +50,8 @@ class ShaderBase(Base):
         return Task.cont
 
     def reload_shader(self):
-        self.model.set_shader(Shader.load(Shader.SL_GLSL, "shader/vertex.glsl", "shader/fragment.glsl"))
+        self.model.set_shader(Shader.load(Shader.SL_GLSL, "shader/shader.vert", "shader/shader.frag"))
 
 if __name__ == '__main__':
     demo = ShaderBase()
     demo.run()
-
