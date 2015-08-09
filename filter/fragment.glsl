@@ -19,13 +19,13 @@ void main () {
   vec4 color_6 = texelFetch(dtex, ivec2(gl_FragCoord.xy) + ivec2( 1, -1), 0);
   vec4 color_7 = texelFetch(dtex, ivec2(gl_FragCoord.xy) + ivec2( 1,  0), 0);
   vec4 color_8 = texelFetch(dtex, ivec2(gl_FragCoord.xy) + ivec2( 1,  1), 0);
-  color = abs(color_base - color_1) +
-          abs(color_base - color_2) +
-          abs(color_base - color_3) +
-          abs(color_base - color_4) +
-          abs(color_base - color_5) +
-          abs(color_base - color_6) +
-          abs(color_base - color_7) +
-          abs(color_base - color_8)) * vec4(100, 10, 10, 0);
+  color = (abs(color_base - color_1) +
+           abs(color_base - color_2) +
+           abs(color_base - color_3) +
+           abs(color_base - color_4) +
+           abs(color_base - color_5) +
+           abs(color_base - color_6) +
+           abs(color_base - color_7) +
+           abs(color_base - color_8)) * vec4(100, 10, 10, 0);
 }
 
