@@ -7,7 +7,7 @@ from direct.showbase.ShowBase import ShowBase
 from panda3d.core import PStatClient
 from direct.task import Task
 from panda3d.core import Geom, GeomNode, GeomVertexFormat, \
-    GeomVertexData, GeomTriangles, GeomVertexWriter, GeomVertexReader
+    GeomVertexData, GeomVertexArrayFormat, GeomTriangles, GeomVertexWriter, GeomVertexReader, InternalName
 from panda3d.core import NodePath
 from panda3d.core import Shader
 
@@ -16,7 +16,7 @@ class Base(ShowBase):
         # The basics
         ShowBase.__init__(self)
         base.disableMouse()
-        # base.setBackgroundColor(0, 0, 0)
+        base.setBackgroundColor(0.1, 0.1, 0.1)
         base.setFrameRateMeter(True)
         PStatClient.connect()
         self.accept("escape", sys.exit)
@@ -44,11 +44,20 @@ class Base(ShowBase):
 
     def create_model(self):
         # Set up the vertex arrays
-        vformat = GeomVertexFormat.get_v3c4()
+        vformatArray = GeomVertexArrayFormat()
+        vformatArray.addColumn(InternalName.make("vertex"), 3, Geom.NTFloat32, Geom.CPoint)
+        vformatArray.addColumn(InternalName.make("color"), 4, Geom.NTFloat32, Geom.CColor)
+
+        vformat = GeomVertexFormat()
+        vformat.addArray(vformatArray)
+        vformat = GeomVertexFormat.registerFormat(vformat)
+
         vdata = GeomVertexData("Data", vformat, Geom.UHStatic)
         vertex = GeomVertexWriter(vdata, 'vertex')
         color = GeomVertexWriter(vdata, 'color')
+
         geom = Geom(vdata)
+
         # Vertex data
         vertex.addData3f(1.5, 0, -1)
         color.addData4f(1, 0, 0, 1)
@@ -56,6 +65,7 @@ class Base(ShowBase):
         color.addData4f(0, 1, 0, 1)
         vertex.addData3f(0, 0, 1)
         color.addData4f(0, 0, 1, 1)
+
         # Primitive
         tri = GeomTriangles(Geom.UHStatic)
         tri.add_vertex(2)
@@ -94,7 +104,12 @@ class Base(ShowBase):
         return Task.cont
 
     def reload_shader(self):
-        self.model.set_shader(Shader.load(Shader.SL_GLSL, "shader.vert", "shader.frag"))
+        self.model.set_shader(Shader.load(Shader.SL_GLSL,
+                                          vertex = "shader.vert",
+                                          #tess_control = "shader.tesc",
+                                          #tess_evaluation = "shader.tese",
+                                          geometry = "shader.geom",
+                                          fragment = "shader.frag"))
 
 if __name__ == '__main__':
     app = Base()
