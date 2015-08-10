@@ -16,7 +16,7 @@ class Base(ShowBase):
         # The basics
         ShowBase.__init__(self)
         base.disableMouse()
-        base.setBackgroundColor(0, 0, 0)
+        # base.setBackgroundColor(0, 0, 0)
         base.setFrameRateMeter(True)
         PStatClient.connect()
         self.accept("escape", sys.exit)

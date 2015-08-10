@@ -1,14 +1,15 @@
 #version 130
 
-in vec4 vert_color;
-flat in int instance;
+in vec4 geom_color;
+flat in int geom_instance;
+
 out vec4 frag_color;
 
 void main () {
-  if (instance == 0) {
-    frag_color = vert_color;
+  if (geom_instance == 0) {
+    frag_color = geom_color;
   } else {
-    frag_color = vec4(1, 1, 1, 2) - vert_color;
+    frag_color = vec4(1, 1, 1, 2) - geom_color;
   }
 }
 

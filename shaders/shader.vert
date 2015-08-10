@@ -1,8 +1,7 @@
-#version 130
+#version 140
 
 in vec4 p3d_Vertex;
 uniform mat4 p3d_ModelViewProjectionMatrix;
-in int gl_InstanceID;
 
 in vec4 color;
 out vec4 vert_color;
