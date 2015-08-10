@@ -16,7 +16,7 @@ class Base(ShowBase):
         # The basics
         ShowBase.__init__(self)
         base.disableMouse()
-        base.setBackgroundColor(0.1, 0.1, 0.1)
+        #base.setBackgroundColor(0.1, 0.1, 0.1)
         base.setFrameRateMeter(True)
         PStatClient.connect()
         self.accept("escape", sys.exit)
@@ -45,16 +45,16 @@ class Base(ShowBase):
     def create_model(self):
         # Set up the vertex arrays
         vformatArray = GeomVertexArrayFormat()
-        vformatArray.addColumn(InternalName.make("vertex"), 3, Geom.NTFloat32, Geom.CPoint)
-        vformatArray.addColumn(InternalName.make("color"), 4, Geom.NTFloat32, Geom.CColor)
+        vformatArray.addColumn(InternalName.make("py_vertex"), 3, Geom.NTFloat32, Geom.CPoint)
+        vformatArray.addColumn(InternalName.make("py_color"), 4, Geom.NTFloat32, Geom.CColor)
 
         vformat = GeomVertexFormat()
         vformat.addArray(vformatArray)
         vformat = GeomVertexFormat.registerFormat(vformat)
 
         vdata = GeomVertexData("Data", vformat, Geom.UHStatic)
-        vertex = GeomVertexWriter(vdata, 'vertex')
-        color = GeomVertexWriter(vdata, 'color')
+        vertex = GeomVertexWriter(vdata, 'py_vertex')
+        color = GeomVertexWriter(vdata, 'py_color')
 
         geom = Geom(vdata)
 
