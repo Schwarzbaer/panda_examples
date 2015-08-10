@@ -72,7 +72,7 @@ class Base(ShowBase):
                                   vertex = "shader.vert",
                                   #tess_control = "shader.tesc",
                                   #tess_evaluation = "shader.tese",
-                                  #geometry = "shader.geom",
+                                  geometry = "shader.geom",
                                   fragment = "shader.frag"))
         np.set_shader_input("time", 0.0)
         # Hardware instancing

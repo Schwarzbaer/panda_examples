@@ -16,5 +16,12 @@ void main(void) {
     EmitVertex();
   }
   EndPrimitive();
+  for (int i = 0; i < gl_in.length(); ++i) {
+    gl_Position = gl_in[2-i].gl_Position;
+    geom_color = vert_color[2-i];
+    geom_instance = instance[2-i];
+    EmitVertex();
+  }
+  EndPrimitive();
 }
 
