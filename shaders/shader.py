@@ -45,6 +45,10 @@ class Base(ShowBase):
     def create_model(self):
         # Set up the vertex arrays
         vformatArray = GeomVertexArrayFormat()
+        # Panda3D implicitly generates a bounding volume from a
+        # column named "vertex", so you either
+        # * have a column of that name, or
+        # * add a bounding volume yourself.
         vformatArray.addColumn(InternalName.make("vertex"), 3, Geom.NTFloat32, Geom.CPoint)
         vformatArray.addColumn(InternalName.make("color"), 4, Geom.NTFloat32, Geom.CColor)
 
