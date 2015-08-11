@@ -94,7 +94,7 @@ class Base(ShowBase):
                                   geometry = "shader.geom",
                                   fragment = "shader.frag"))
         np.set_shader_input("time", 0.0)
-        np.set_shader_input("tess_level", 4.0)
+        np.set_shader_input("tess_level", 8.0)
         # Hardware instancing
         np.set_instance_count(2)
         return np

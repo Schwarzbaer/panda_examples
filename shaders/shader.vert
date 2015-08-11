@@ -5,7 +5,7 @@ in vec4 vertex;
 in vec4 color;
 
 out vec4 vert_color;
-flat out int instance;
+flat out int vert_instance;
 
 void main()  {
   vec4 vert_pos = vertex;
@@ -13,7 +13,7 @@ void main()  {
   // gl_Position = p3d_ModelViewProjectionMatrix * vert_pos;
   gl_Position = vert_pos;
   vert_color = color;
-  instance = gl_InstanceID;
+  vert_instance = gl_InstanceID;
 }
 
 
