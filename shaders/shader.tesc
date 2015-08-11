@@ -1,5 +1,7 @@
 #version 430
 
+// Set the tessellation level.
+
 uniform float tess_level;
 in vec4 vert_color[];
 flat in int vert_instance[];

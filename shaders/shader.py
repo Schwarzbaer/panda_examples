@@ -4,17 +4,14 @@ import sys
 import random
 
 from direct.showbase.ShowBase import ShowBase
-from panda3d.core import PStatClient
-from direct.task import Task
-from panda3d.core import Geom, GeomNode, GeomVertexFormat, \
-    GeomVertexData, GeomVertexArrayFormat, \
-    GeomTriangles, GeomPatches, \
-    GeomVertexWriter, GeomVertexReader, InternalName
 from panda3d.core import NodePath
+from panda3d.core import Geom, GeomNode, GeomPatches, \
+    GeomVertexFormat, GeomVertexData, GeomVertexArrayFormat, \
+    GeomVertexWriter, GeomVertexReader, \
+    InternalName
 from panda3d.core import Shader
-
-from panda3d.core import loadPrcFileData
-loadPrcFileData('init', 'gl-debug #t')
+from direct.task import Task
+from panda3d.core import PStatClient
 
 class Base(ShowBase):
     def __init__(self):
@@ -82,11 +79,13 @@ class Base(ShowBase):
         tri.add_vertex(0)
         tri.close_primitive()
         geom.addPrimitive(tri)
+
         # Create the actual node
         node = GeomNode('geom_node')
         node.addGeom(geom)
         np = NodePath(node)
-        # Shader and initial shader vars
+
+        # Shader, initial shader vars, number of instances
         np.set_shader(Shader.load(Shader.SL_GLSL,
                                   vertex = "shader.vert",
                                   tess_control = "shader.tesc",
@@ -94,8 +93,7 @@ class Base(ShowBase):
                                   geometry = "shader.geom",
                                   fragment = "shader.frag"))
         np.set_shader_input("time", 0.0)
-        np.set_shader_input("tess_level", 8.0)
-        # Hardware instancing
+        np.set_shader_input("tess_level", 32.0)
         np.set_instance_count(2)
         return np
 

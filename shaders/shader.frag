@@ -1,5 +1,7 @@
 #version 130
 
+// Invert the colors of the non-first instance.
+
 in vec4 geom_color;
 flat in int geom_instance;
 

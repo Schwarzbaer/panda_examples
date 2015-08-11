@@ -1,5 +1,7 @@
 #version 150
 
+// Add backsides to the triangles.
+
 layout(triangles) in;
 in vec4[3] tese_color;
 flat in int[3] tese_instance;
