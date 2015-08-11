@@ -7,9 +7,14 @@ from direct.showbase.ShowBase import ShowBase
 from panda3d.core import PStatClient
 from direct.task import Task
 from panda3d.core import Geom, GeomNode, GeomVertexFormat, \
-    GeomVertexData, GeomVertexArrayFormat, GeomTriangles, GeomVertexWriter, GeomVertexReader, InternalName
+    GeomVertexData, GeomVertexArrayFormat, \
+    GeomTriangles, GeomPatches, \
+    GeomVertexWriter, GeomVertexReader, InternalName
 from panda3d.core import NodePath
 from panda3d.core import Shader
+
+from panda3d.core import loadPrcFileData
+loadPrcFileData('init', 'gl-debug #t')
 
 class Base(ShowBase):
     def __init__(self):
@@ -71,7 +76,7 @@ class Base(ShowBase):
         color.addData4f(0, 0, 1, 1)
 
         # Primitive
-        tri = GeomTriangles(Geom.UHStatic)
+        tri = GeomPatches(3, Geom.UHStatic)
         tri.add_vertex(2)
         tri.add_vertex(1)
         tri.add_vertex(0)
@@ -84,11 +89,12 @@ class Base(ShowBase):
         # Shader and initial shader vars
         np.set_shader(Shader.load(Shader.SL_GLSL,
                                   vertex = "shader.vert",
-                                  #tess_control = "shader.tesc",
-                                  #tess_evaluation = "shader.tese",
+                                  tess_control = "shader.tesc",
+                                  tess_evaluation = "shader.tese",
                                   geometry = "shader.geom",
                                   fragment = "shader.frag"))
         np.set_shader_input("time", 0.0)
+        np.set_shader_input("tess_level", 4.0)
         # Hardware instancing
         np.set_instance_count(2)
         return np
@@ -110,8 +116,8 @@ class Base(ShowBase):
     def reload_shader(self):
         self.model.set_shader(Shader.load(Shader.SL_GLSL,
                                           vertex = "shader.vert",
-                                          #tess_control = "shader.tesc",
-                                          #tess_evaluation = "shader.tese",
+                                          tess_control = "shader.tesc",
+                                          tess_evaluation = "shader.tese",
                                           geometry = "shader.geom",
                                           fragment = "shader.frag"))
 
