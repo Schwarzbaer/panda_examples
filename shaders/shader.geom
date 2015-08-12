@@ -1,4 +1,5 @@
 #version 150
+#pragma include "shader.data"
 
 // Add backsides to the triangles.
 

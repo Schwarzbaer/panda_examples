@@ -1,4 +1,5 @@
 #version 430
+#pragma include "shader.data"
 
 // Calculate the position and other attributes of the vertices of the now
 // tessellated patches.

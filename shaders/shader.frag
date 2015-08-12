@@ -1,4 +1,5 @@
 #version 130
+#pragma include "shader.data"
 
 // Invert the colors of the non-first instance.
 
