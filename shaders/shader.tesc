@@ -4,11 +4,10 @@
 // Set the tessellation level.
 
 uniform float tess_level;
-in demoVertex v[];
+// in demoVertex v[];
 
 layout(vertices = 3) out;
-out vec4 tesc_color[];
-flat out int tesc_instance[];
+// layout(location = 0) out demoVertex v_tesc[];
 
 void main() {
   if (gl_InvocationID == 0) {
@@ -20,7 +19,6 @@ void main() {
     gl_TessLevelOuter[3] = tess_level;
   }
   gl_out[gl_InvocationID].gl_Position = gl_in[gl_InvocationID].gl_Position;
-  tesc_color[gl_InvocationID] = v[gl_InvocationID].color;
-  tesc_instance[gl_InvocationID] = v[gl_InvocationID].instance;
+  // v_tesc[gl_InvocationID] = v_vert[gl_InvocationID];
 }
 

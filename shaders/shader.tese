@@ -7,11 +7,9 @@
 uniform mat4 p3d_ModelViewProjectionMatrix;
 uniform float time;
 layout(triangles, equal_spacing, ccw) in;
-in vec4 tesc_color[];
-flat in int tesc_instance[];
+in demoVertex v[];
 
-out vec4 tese_color;
-flat out int tese_instance;
+out demoVertex v_tese;
 
 void main() {
   gl_Position = p3d_ModelViewProjectionMatrix *
