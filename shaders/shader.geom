@@ -6,6 +6,7 @@
 layout(triangles) in;
 in vec4[3] tese_color;
 flat in int[3] tese_instance;
+out demoVertex[3] vertexTese;
 
 layout(triangle_strip, max_vertices = 6) out;
 out vec4 geom_color;
