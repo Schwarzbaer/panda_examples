@@ -4,12 +4,13 @@
 // Add backsides to the triangles.
 
 layout(triangles) in;
-layout(location = 0) in demoVertex[3] vertexTese;
-in vec4[3] tese_color;
-flat in int[3] tese_instance;
+layout(location = 3) in demoVertex[3] vertexTese;
+layout(location = 4) in vec4[3] tese_color;
+layout(location = 5) flat in int[3] tese_instance;
 
 layout(triangle_strip, max_vertices = 6) out;
-// layout(location = 0) out demoVertex[3] vertexGeom;
+//layout(location = 0) 
+out demoVertex[3] vertexGeom;
 out vec4 geom_color; // delete
 flat out int geom_instance; // delete
 

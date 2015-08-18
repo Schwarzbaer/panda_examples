@@ -10,9 +10,9 @@ layout(triangles, equal_spacing, ccw) in;
 in demoVertex vertexTesc[];
 in vec4 tesc_color[];
 
-out demoVertex vertexTese;
-out vec4 tese_color; // delete
-flat out int tese_instance; // delete
+layout(location = 3) out demoVertex vertexTese;
+layout(location = 4) out vec4 tese_color; // delete
+layout(location = 5) flat out int tese_instance; // delete
 
 void main() {
   gl_Position = p3d_ModelViewProjectionMatrix *
