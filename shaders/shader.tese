@@ -8,11 +8,8 @@ uniform mat4 p3d_ModelViewProjectionMatrix;
 uniform float time;
 layout(triangles, equal_spacing, ccw) in;
 in demoVertex vertexTesc[];
-in vec4 tesc_color[];
 
-layout(location = 3) out demoVertex vertexTese;
-layout(location = 4) out vec4 tese_color; // delete
-layout(location = 5) flat out int tese_instance; // delete
+out demoVertex vertexTese;
 
 void main() {
   gl_Position = p3d_ModelViewProjectionMatrix *
@@ -21,15 +18,9 @@ void main() {
                  gl_TessCoord.z * gl_in[2].gl_Position +
                  vec4(0, -0.3, 0, 0) *
                  sin(time * 5.0 + gl_TessCoord.x * 3.1415 * 2.0 * 3.0));
-  // delete this
-  tese_color = gl_TessCoord.x * vertexTesc[0].color +
-               gl_TessCoord.y * vertexTesc[1].color +
-               gl_TessCoord.z * vertexTesc[2].color;
-  tese_instance = int(vertexTesc[0].instance);
 
 
   vertexTese.position = gl_Position;
-  vertexTese.color = tese_color;
   vertexTese.color = gl_TessCoord.x * vertexTesc[0].color +
                      gl_TessCoord.y * vertexTesc[1].color +
                      gl_TessCoord.z * vertexTesc[2].color;

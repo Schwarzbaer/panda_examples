@@ -4,37 +4,36 @@
 // Add backsides to the triangles.
 
 layout(triangles) in;
-layout(location = 3) in demoVertex[3] vertexTese;
-layout(location = 4) in vec4[3] tese_color;
-layout(location = 5) flat in int[3] tese_instance;
+in demoVertex[3] vertexTese;
 
 layout(triangle_strip, max_vertices = 6) out;
-//layout(location = 0) 
-out demoVertex[3] vertexGeom;
+layout(location=10) out demoVertex vertexGeom;
 out vec4 geom_color; // delete
 flat out int geom_instance; // delete
 
 void main(void) {
   for (int i = 0; i < gl_in.length(); ++i) {
     gl_Position = gl_in[i].gl_Position;
-    geom_color = vertexTese[i].color;
-    geom_instance = int(vertexTese[0].instance);
 
-    //vertexGeom[i].position = vertexTese[i].position;
-    //vertexGeom[i].color    = vertexTese[i].color;
-    //vertexGeom[i].instance = vertexTese[i].instance;
+    vertexGeom.position = vertexTese[i].position;
+    vertexGeom.color    = vertexTese[i].color;
+    vertexGeom.instance = vertexTese[i].instance;
+
+    geom_color = vertexGeom.color;
+    geom_instance = int(vertexGeom.instance);
 
     EmitVertex();
   }
   EndPrimitive();
   for (int i = 0; i < gl_in.length(); ++i) {
     gl_Position = gl_in[2-i].gl_Position;
-    geom_color = vertexTese[2-i].color;
-    geom_instance = int(vertexTese[0].instance);
 
-    //vertexGeom[i].position = vertexTese[2-i].position;
-    //vertexGeom[i].color    = vertexTese[2-i].color;
-    //vertexGeom[i].instance = vertexTese[2-i].instance;
+    vertexGeom.position = vertexTese[2-i].position;
+    vertexGeom.color    = vertexTese[2-i].color;
+    vertexGeom.instance = vertexTese[2-i].instance;
+
+    geom_color = vertexGeom.color;
+    geom_instance = int(vertexGeom.instance);
 
     EmitVertex();
   }

@@ -3,6 +3,7 @@
 
 // Invert the colors of the non-first instance.
 
+//layout(location=10) in demoVertex vertexGeom;
 in vec4 geom_color;
 flat in int geom_instance;
 

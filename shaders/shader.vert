@@ -9,7 +9,6 @@ in vec4 vertex;
 in vec4 color;
 
 layout(location = 0) out demoVertex vertexRaw;
-//out vec4 vert_color;
 
 void main()  {
   vec4 vert_pos = vertex;
@@ -19,8 +18,6 @@ void main()  {
   vertexRaw.position = vert_pos;
   vertexRaw.color = color;
   vertexRaw.instance = float(gl_InstanceID);
-
-  //vert_color = color;
 }
 
 
