@@ -1,19 +1,17 @@
-#version 130
+#version 410
 #pragma include "shader.data"
 
 // Invert the colors of the non-first instance.
 
-//layout(location=10) in demoVertex vertexGeom;
-in vec4 geom_color;
-flat in int geom_instance;
+layout(location=10) in demoVertex vertexGeom;
 
 out vec4 frag_color;
 
 void main () {
-  if (geom_instance == 0) {
-    frag_color = geom_color;
+  if (vertexGeom.instance == 0) {
+    frag_color = vertexGeom.color;
   } else {
-    frag_color = vec4(1, 1, 1, 2) - geom_color;
+    frag_color = vec4(1, 1, 1, 2) - vertexGeom.color;
   }
 }
 
