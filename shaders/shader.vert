@@ -17,7 +17,7 @@ void main()  {
   vertexRaw.position = vertex;
 
   float offset = (vertexRaw.instance - 0.5) * 2.0;
-  offset = offset * numInstances * 1.2;
+  offset = offset * numInstances * 1.5;
   vertexRaw.position.x = vertexRaw.position.x + offset;
 
   gl_Position = vertexRaw.position;

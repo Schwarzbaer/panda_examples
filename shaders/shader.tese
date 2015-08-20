@@ -7,9 +7,9 @@
 uniform mat4 p3d_ModelViewProjectionMatrix;
 uniform float time;
 layout(triangles, equal_spacing, ccw) in;
-in demoVertex vertexTesc[];
+layout(location = 1) in demoVertex vertexTesc[];
 
-out demoVertex vertexTese;
+layout(location = 2) out demoVertex vertexTese;
 
 void main() {
   gl_Position = p3d_ModelViewProjectionMatrix *

@@ -13,7 +13,7 @@ from panda3d.core import Shader
 from direct.task import Task
 from panda3d.core import PStatClient
 
-num_instances = 3
+num_instances = 5
 
 class Base(ShowBase):
     def __init__(self):
@@ -28,7 +28,7 @@ class Base(ShowBase):
         self.camera_orbit = base.render.attach_new_node("Camera orbit")
         self.camera_pitch = self.camera_orbit.attach_new_node("Camera pitch")
         base.camera.reparent_to(self.camera_pitch)
-        base.camera.set_pos(0, -10, 0)
+        base.camera.set_pos(0, -30, 0)
         # Camera control
         self.camera_movement = (0, 0)
         self.accept("arrow_up",       self.change_camera_movement, [ 0, -1])

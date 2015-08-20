@@ -4,10 +4,10 @@
 // Add backsides to the triangles.
 
 layout(triangles) in;
-in demoVertex[3] vertexTese;
+layout(location = 2) in demoVertex[3] vertexTese;
 
 layout(triangle_strip, max_vertices = 6) out;
-layout(location=10) out demoVertex vertexGeom;
+layout(location = 3) out demoVertex vertexGeom;
 
 void main(void) {
   for (int i = 0; i < gl_in.length(); ++i) {

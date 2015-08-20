@@ -7,7 +7,7 @@ uniform float tess_level;
 layout(location = 0) in demoVertex vertexRaw[];
 
 layout(vertices = 3) out;
-layout(location = 0) out demoVertex vertexTesc[];
+layout(location = 1) out demoVertex vertexTesc[];
 
 void main() {
   if (gl_InvocationID == 0) {
