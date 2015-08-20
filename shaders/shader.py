@@ -13,6 +13,8 @@ from panda3d.core import Shader
 from direct.task import Task
 from panda3d.core import PStatClient
 
+num_instances = 3
+
 class Base(ShowBase):
     def __init__(self):
         # The basics
@@ -94,7 +96,8 @@ class Base(ShowBase):
                                   fragment = "shader.frag"))
         np.set_shader_input("time", 0.0)
         np.set_shader_input("tess_level", 32.0)
-        np.set_instance_count(2)
+        np.set_instance_count(num_instances)
+        np.set_shader_input("numInstances", num_instances)
         return np
 
     def change_camera_movement(self, turn, pitch):

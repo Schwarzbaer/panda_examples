@@ -5,19 +5,21 @@
 // goes right.
 
 uniform mat4 p3d_ModelViewProjectionMatrix;
+uniform float numInstances;
 in vec4 vertex;
 in vec4 color;
 
 layout(location = 0) out demoVertex vertexRaw;
 
 void main()  {
-  vec4 vert_pos = vertex;
-  vert_pos.x += (float(gl_InstanceID) - 0.5) * 3.0;
-  gl_Position = vert_pos;
-
-  vertexRaw.position = vert_pos;
   vertexRaw.color = color;
-  vertexRaw.instance = float(gl_InstanceID);
-}
+  vertexRaw.instance = float(gl_InstanceID) / (numInstances - 1);
+  vertexRaw.position = vertex;
 
+  float offset = (vertexRaw.instance - 0.5) * 2.0;
+  offset = offset * numInstances * 1.2;
+  vertexRaw.position.x = vertexRaw.position.x + offset;
+
+  gl_Position = vertexRaw.position;
+}
 
