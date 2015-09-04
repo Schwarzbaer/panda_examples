@@ -35,6 +35,12 @@ Features demonstrated:
 * Adding a Rigid Body
 * Apply an impulse
 
+borderless window
+-------
+
+Features demonstrated:
+*rendering windows without border (exit with esc key)
+
 cubemap
 -------
 
