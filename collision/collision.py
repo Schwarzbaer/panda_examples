@@ -41,7 +41,7 @@ class RayThatCollidesWithScene:
         hitter = CollisionRay(0, 0, 0, 0, 1, 0)
         self.hitter_nodepath = base.render.attach_new_node(CollisionNode('collision_hitter'))
         self.hitter_nodepath.node().addSolid(hitter)
-        self.hitter_nodepath.set_pos(0, -10, 0)
+        self.hitter_nodepath.set_pos(0, -2, 0)
         self.hitter_nodepath.show()
 
     def collide(self, task):
@@ -52,7 +52,8 @@ class RayThatCollidesWithScene:
 
 
 if __name__ == '__main__':
-    app = Base(create_model=False)
+    app = Base(create_model=True)
+    app.model.set_scale(0.2)
     from_object = RayThatCollidesWithScene()
     into_object = SphereThatGetsCollidedWith()
     app.run()
