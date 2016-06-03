@@ -8,7 +8,7 @@ from panda3d.core import PStatClient
 from direct.task import Task
 
 class Base(ShowBase):
-    def __init__(self, create_model=True):
+    def __init__(self):
         # The basics
         ShowBase.__init__(self)
         base.disableMouse()
@@ -33,12 +33,12 @@ class Base(ShowBase):
         self.accept("arrow_right-up", self.change_camera_movement, [-1,  0])
         base.taskMgr.add(self.move_camera, "Move camera")
         # Object
-        if create_model:
-            self.create_model()
+        self.setup_scene()
+        self.model = self.create_model()
+        self.model.reparent_to(base.render)
 
     def create_model(self):
-        self.model = base.loader.loadModel("models/smiley")
-        self.model.reparent_to(base.render)
+        return loader.loadModel("models/smiley")
 
     def change_camera_movement(self, turn, pitch):
         self.camera_movement = (self.camera_movement[0] + turn,
