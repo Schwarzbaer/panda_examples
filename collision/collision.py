@@ -20,7 +20,11 @@ class SphereThatGetsCollidedWith:
         # poly model, but the collisions will be calculated against a
         # mathematically perfect sphere.
         self.targets = [self.create_sphere(model_name, bitmask)
-                        for model_name, bitmask in [("smiley", BM_LEFT), ("frowney", BM_RIGHT), ("jack", BM_LEFT | BM_RIGHT)]]
+                        for model_name, bitmask in [
+                            ("smiley", BM_LEFT),
+                            ("frowney", BM_RIGHT),
+                            ("jack", BM_LEFT | BM_RIGHT),
+                       ]]
         base.taskMgr.add(self.move_collidee, "Moving Target Task")
     
     def create_sphere(self, model_name, bitmask):
@@ -45,12 +49,15 @@ class SphereThatGetsCollidedWith:
 
 class RayThatCollidesWithScene:
     def __init__(self):
-        self.collision_rays = [self.setup_collision_ray(offset, bitmask)
-                               for offset, bitmask in [(-3, BM_LEFT), (3, BM_RIGHT)]]
+        self.hitters = [self.setup_collision_ray(offset, bitmask)
+                        for offset, bitmask in [
+                            (-3, BM_LEFT),
+                            (3, BM_RIGHT),
+                       ]]
         self.queue = CollisionHandlerQueue()
         self.traverser = CollisionTraverser('Collision Traverser')
         self.traverser.showCollisions(base.render)
-        for ray in self.collision_rays:
+        for ray in self.hitters:
             self.traverser.add_collider(ray, self.queue)
         base.taskMgr.add(self.collide, "Collision Task")
 
