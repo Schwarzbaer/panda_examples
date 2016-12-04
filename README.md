@@ -3,6 +3,7 @@ panda\_examples
 
 These are examples for functionality of Panda3D. They are meant to be as minimal as possible, each showing exactly one thing, and each be executable right out of the box. The intention is rather to get you started than being complete examples of anything, though in the future further examples will delve into more advanced features.
 
+
 basics
 ------
 
@@ -13,6 +14,7 @@ Features demonstrated:
 * Events
 * Tasks
 * Moving a node
+
 
 3d-sound
 --------
@@ -27,6 +29,7 @@ Features demonstrated:
 Features not yet demonstrated:
 * Doppler shift
 
+
 bullet\_physics
 ---------------
 
@@ -34,6 +37,7 @@ Features demonstrated:
 * Setting up and stepping a physics simulation
 * Adding a Rigid Body
 * Apply an impulse
+
 
 cubemap
 -------
@@ -43,6 +47,7 @@ This one sets up a scene and saves a cube map snapshot of it a six images in ind
 Features demonstrated:
 * Save a cube map
 
+
 FSM
 ---
 
@@ -50,6 +55,7 @@ This sets up a simple state machine that lets a sphere rotate clockwise, counter
 
 Features demonstrated:
 * Finite State Machine
+
 
 geometry
 --------
@@ -62,6 +68,7 @@ Features demonstrated:
 * Creating Geoms / GeomNodes from scratch
 * Writing (and, in comments, reading) vertex data
 
+
 GUI
 ---
 
@@ -69,6 +76,7 @@ Okay, it *does* get a bit ridiculous here. All I did here was plaster a button o
 
 Features demonstrated:
 * DirectGUI elements
+
 
 libRocket
 ---------
@@ -80,6 +88,7 @@ Features demonstrated:
 * Setting up the Python-side of the GUI
 * RML / RCSS
 
+
 lod
 ---
 
@@ -87,6 +96,7 @@ Level of detail. I created a model of a tree on tree different detail levels and
 
 Features demonstrated:
 * Level of Detail nodes
+
 
 render\_to\_texture
 -------------------
@@ -99,12 +109,14 @@ Features demonstrated:
 * Create a camera and let it render into that buffer.
 * Get a texture from the buffer and set it as a "monitors" texture.
 
+
 selfshadow
 ----------
 
 Features demonstrated:
 * Set up a shadow-casting light.
 * Make all objects in the scene graph receive shadows.
+
 
 skybox
 ------
@@ -116,16 +128,26 @@ A bunch of spheres in the scene show that the skybox gets rendered "behind" obje
 Features demonstrated:
 * Rendering objects as background
 
+
 filter
 ------
 
-Featured demonstrated:
+Features demonstrated:
 * Post-processing effects with fragment shaders
 
 This is mostly a copy-and-paste job of the Hello World application in Panda3D's manual, with a filter slapped on at the end. The FilterManager causes a scene to not be rendered directly to the scene, but instead to textures on a quad, which then does get fed back into fragment shading.
+
+
+buffer\_protocol
+----------------
+
+The buffer protocol is a Python feature that lets C extensions efficiently share memory. In the context on Panda3D, this is a viable way to share texture and vertex data with non-Panda3D modules.
+
+Features demonstrated:
+* (gizeh_to_panda3d.py) Creating images on a canvas backed by a numpy array (which is the standard way of storing images in Python), and copying it into a Panda3D texture. Requires Gizeh (a Python module for rendering vector graphics, akin to Cairo).
+
 
 boilerplate
 -----------
 
 This is code I find helpful when developing experiments with.
-

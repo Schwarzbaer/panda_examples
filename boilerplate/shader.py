@@ -43,7 +43,9 @@ class ShaderBase(Base):
         np.set_shader_input("time", 0.0)
         # No instancing necessary
         #np.set_instance_count(27)
-        return np
+        # return np
+        np.reparent_to(base.render)
+        self.model = np
 
     def refresh_shader_vars(self, task):
         self.model.set_shader_input("time", task.time)
