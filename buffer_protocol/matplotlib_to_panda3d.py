@@ -36,11 +36,11 @@ class Plot:
         return graph_bytes
 
 
-class PygameCard(ShowBase):
+class MatPlotLibDemo(ShowBase):
     def __init__(self):
         ShowBase.__init__(self)
         base.setFrameRateMeter(True)
-        
+
         x_size, y_size = 640, 480
         xy_ratio = float(y_size) / float(x_size)
         self.plot = Plot(x_size, y_size)
@@ -66,5 +66,5 @@ class PygameCard(ShowBase):
         return task.cont
 
 
-p = PygameCard()
-p.run()
+mpld = MatPlotLibDemo()
+mpld.run()
