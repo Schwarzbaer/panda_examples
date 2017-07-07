@@ -34,12 +34,12 @@ class PygameCard(ShowBase):
         self.screen.setPos(-0.5,2,-0.5)
         self.screen.setTexture(self.input_tex)
 
+        self.game_ram_image = self.game.surface.get_view("0")
         taskMgr.add(self.update, "update pygame_card")
 
     def update(self, task):
         self.game.update()
-        ram = self.game.surface.get_view("0")
-        self.input_tex.set_ram_image_as(ram, "RGBA")
+        self.input_tex.set_ram_image_as(self.game_ram_image, "RGBA")
         return task.cont
 
 
