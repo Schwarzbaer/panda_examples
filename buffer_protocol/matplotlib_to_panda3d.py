@@ -14,7 +14,7 @@ class Plot:
         self.data_x = list(range(100))
         self.data_y = [random()]
         for _ in range(99):
-            self.data_y.append(self.data_y[-1] + random() - 0.5)
+            self.data_y.append((self.data_y[-1] + random()) / 2.0)
 
         self.fig = Figure(figsize=(x_size / 100.0, y_size / 100.0), dpi=100.0)
         self.ax1 = self.fig.add_subplot(1, 1, 1)
@@ -22,16 +22,22 @@ class Plot:
             self.data_x,
             self.data_y,
             'g-',
-            label="Buying price",
+            label="Nearly random data",
         )
-        self.ax1.set_title("Price development")
-        self.ax1.legend()
+        self.ax1.set_title("A matplotlib figure")
+        self.ax1.set_autoscaley_on(False)
+        self.ax1.set_ylim([0.0, 1.0])
+        self.ax1.legend(loc=4)
         self.ax1.grid()
 
     def draw(self):
-        self.data_y.append(self.data_y[-1] + random() - 0.5)
+        self.data_y.append((self.data_y[-1] + random()) / 2.0)
         self.data_y.pop(0)
-        self.line_data.set_ydata(self.data_y)
+        # If your y axis limits are going to change, you need:
+        #     self.line_data.set_ydata(self.data_y)
+        # or set limits explicitly, as shown in __init__().
+        # set_data() doesn't realign them, but is cheaper.
+        self.line_data.set_data(self.data_x, self.data_y)
         graph_bytes, _res = FigureCanvasAgg(self.fig).print_to_buffer()
         return graph_bytes
 
