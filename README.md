@@ -118,6 +118,14 @@ Features demonstrated:
 * Make all objects in the scene graph receive shadows.
 
 
+shaders
+-------
+
+Features demonstrated:
+* Minimal shader pipeline
+* Full shader pipeline
+
+
 skybox
 ------
 
