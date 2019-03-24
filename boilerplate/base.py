@@ -29,6 +29,8 @@ class Base(ShowBase):
         self.mouse_pos = None
         self.accept("mouse3", self.set_rotation_mode, [True])
         self.accept("mouse3-up", self.set_rotation_mode, [False])
+        self.accept("wheel_up", self.move_camera_distance, [-1])
+        self.accept("wheel_down", self.move_camera_distance, [1])
         base.taskMgr.add(self.move_camera, "Move camera")
         # Object
         if create_model:
@@ -42,6 +44,9 @@ class Base(ShowBase):
         self.rotation_mode = mode
         if base.mouseWatcherNode.has_mouse():
             self.mouse_pos = base.mouseWatcherNode.get_mouse()
+
+    def move_camera_distance(self, direction):
+        base.camera.set_pos(base.camera.get_pos() * (1 + 0.1 * direction))
 
     def move_camera(self, task):
         rot = globalClock.get_dt() * 360.0 / 3.0
