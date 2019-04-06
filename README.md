@@ -101,13 +101,23 @@ Features demonstrated:
 render\_to\_texture
 -------------------
 
-You have a camera sonewhere in your game world and a screen that shows wat's on the camera? You want 2D displays showing something that's easier to model in 3D? Or you have any other purpose for having a Panda3D camera render into a texture? This is the example for you.
+You have a camera somewhere in your game world and a screen that shows what's on the camera? You want 2D displays showing something that's easier to model in 3D? Or you have any other purpose for having a Panda3D camera render into a texture? This is the example for you.
 
 Features demonstrated:
 * Set up a secondary scene graph, which will get rendered into textures.
 * Create a butter, set its sort order.
 * Create a camera and let it render into that buffer.
 * Get a texture from the buffer and set it as a "monitors" texture.
+
+
+reprojection
+------------
+
+Scene graph position to camera frustum position and back.
+
+Features demonstrated:
+* `Lens.project`
+* `Lens.extrude_depth()`
 
 
 selfshadow
