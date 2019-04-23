@@ -57,7 +57,7 @@ model_axis.set_scale(0.2)
 
 target_node = s.loader.load_model('models/smiley')
 target_node.reparent_to(s.render)
-target_node.set_h(45)
+target_node.set_h(0)
 target_node.set_scale(1.5)
 target_node.set_render_mode_wireframe()
 
@@ -106,24 +106,16 @@ def stabilize(task):
         delta_node.get_h(s.render),
     )
     axis_of_torque.normalize()
-    target_angular_velocity = axis_of_torque * delta_angle / tau
+    target_angular_velocity = axis_of_torque * delta_angle / tau / pi
     steering_impulse = target_angular_velocity * inertia
 
     # We calculate the impulse that cancels out all current rotation,
     # which is noise with regard to the intended rotation.
     countering_impulse = -angular_velocity / 2.5
 
-    # We sum up these impulses. Thus, one frame's steering impulse will be
-    # canceled out in the next frame as being noise movement.
-
     max_impulse = 0.4
 
-    if countering_impulse.length() > max_impulse * 10:
-        impulse = countering_impulse
-        print('Counter mode')
-    else:
-        impulse = countering_impulse + steering_impulse
-        print('Steer mode')
+    impulse = countering_impulse + steering_impulse
     if impulse.length() > max_impulse:
         impulse = impulse / impulse.length() * max_impulse
 
