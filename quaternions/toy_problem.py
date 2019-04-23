@@ -4,6 +4,7 @@ from math import pi
 from direct.showbase.ShowBase import ShowBase
 
 from panda3d.core import VBase3
+from panda3d.core import Vec3
 from panda3d.core import Quat
 from panda3d.core import invert
 from panda3d.bullet import BulletWorld
@@ -99,12 +100,12 @@ def stabilize(task):
     delta_node.set_hpr(delta_hpr)
     delta_angle = delta_node.get_quat().get_angle_rad()
 
-    axis_of_torque = VBase3(
+    axis_of_torque = Vec3(
         -delta_node.get_p(s.render),
         delta_node.get_r(s.render),
         delta_node.get_h(s.render),
-    ) / 180
-    # speed_node.set_scale(axis_of_torque / (2*pi) * 0.1)
+    )
+    axis_of_torque.normalize()
     target_angular_velocity = axis_of_torque * delta_angle / tau
     steering_impulse = target_angular_velocity * inertia
 
@@ -115,12 +116,14 @@ def stabilize(task):
     # We sum up these impulses. Thus, one frame's steering impulse will be
     # canceled out in the next frame as being noise movement.
 
-    impulse = countering_impulse * 0.2 + steering_impulse * 0.8
-    # impulse = countering_impulse
-    # impulse = steering_impulse * 0.5
-    # impulse = VBase3(0, 0, 0)
+    max_impulse = 0.4
 
-    max_impulse = 0.1
+    if countering_impulse.length() > max_impulse * 10:
+        impulse = countering_impulse
+        print('Counter mode')
+    else:
+        impulse = countering_impulse + steering_impulse
+        print('Steer mode')
     if impulse.length() > max_impulse:
         impulse = impulse / impulse.length() * max_impulse
 
@@ -133,9 +136,9 @@ s.task_mgr.add(stabilize, sort=0)
 def add_torque(x=0, y=0, z=0):
     # This happens in world space
     mass.apply_torque_impulse(VBase3(x, y, z))
-s.accept('x', add_torque, [1, 0, 0])
-s.accept('y', add_torque, [0, 1, 0])
-s.accept('z', add_torque, [0, 0, 1])
+s.accept('x', add_torque, [10, 0, 0])
+s.accept('y', add_torque, [0, 10, 0])
+s.accept('z', add_torque, [0, 0, 10])
 
 
 s.run()
