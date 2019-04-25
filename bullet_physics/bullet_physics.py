@@ -1,10 +1,14 @@
 #!/usr/bin/env python
 
+import sys
+
 from direct.showbase.ShowBase import ShowBase
 from panda3d.core import Vec3, Point3
 from panda3d.bullet import BulletWorld, BulletRigidBodyNode, BulletSphereShape
 
 s = ShowBase()
+s.disable_mouse()
+s.accept('escape', sys.exit)
 
 # The physics simulation itself
 physics = BulletWorld()
@@ -19,21 +23,23 @@ s.taskMgr.add(step_physics, 'physics simulation')
 node = BulletRigidBodyNode('Box')
 node.setMass(1.0)
 node.addShape(BulletSphereShape(1))
-
-physics.attachRigidBody(node)
-
 # Attaching the physical object in the scene graph and adding
 # a visible model to it
 np = s.render.attachNewNode(node)
-np.setPos(0, 0, 0)
+np.set_pos(0, 0, 0)
+np.set_hpr(45, 0, 45)
 m = loader.loadModel("models/smiley")
 m.reparentTo(np)
+physics.attachRigidBody(node)
+
 
 # Let's actually see what's happening
 base.cam.setPos(0, -10, 0)
 base.cam.lookAt(0, 0, 0)
 
 # Give the object a nudge and run the program
-node.apply_impulse(Vec3(0,1,0), Point3(0,0,0))
+# the impulse vector is in world space, the position at which it is
+# applied is in object space.
+node.apply_impulse(Vec3(0, 0, 1), Point3(1, 0, 0))
+node.apply_impulse(Vec3(0, 0, -1), Point3(-1, 0, 0))
 s.run()
-
