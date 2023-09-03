@@ -16,9 +16,10 @@ image_count = 0
 def rotate_gimbal(task):
     global image_count
     camera_gimbal.set_h(image_count * 12.0)
+    return task.cont
 def screenshot_and_possibly_abort(task):
     global image_count
-    base.screenshot(f"screenshot-{image_count}.png", False)
+    base.screenshot(f"screenshot-{image_count:03d}.png", False)
     image_count += 1
     if image_count == 30:
         sys.exit()

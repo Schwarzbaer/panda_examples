@@ -103,7 +103,9 @@ offscreen\_filming
 
 If you want to use Panda3D to render frames to image files on the disk
 instead of a window on the screen, that is remarkably easy; Just combine
-`window-type offscreen` with a window's `screenshot()` method.
+`window-type offscreen` with a window's `screenshot()` method. To turn
+the outputted images into a video, you can use
+`ffmpeg -framerate 30 -pattern_type glob -i '*.png' -c:v libx264 -pix_fmt yuv420p out.mp4`.
 
 Features demonstrated:
 * Offscreen rendering
