@@ -98,6 +98,18 @@ Features demonstrated:
 * Level of Detail nodes
 
 
+offscreen\_filming
+------------------
+
+If you want to use Panda3D to render frames to image files on the disk
+instead of a window on the screen, that is remarkably easy; Just combine
+`window-type offscreen` with a window's `screenshot()` method.
+
+Features demonstrated:
+* Offscreen rendering
+* Screenshots
+
+
 render\_to\_texture
 -------------------
 
