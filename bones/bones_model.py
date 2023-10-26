@@ -28,10 +28,11 @@ from direct.actor.Actor import Actor
 # create an animation joint for each circle.
 
 # First, some user-provided values to fiddle with.
-vertices_per_circle = 3
-circle_radius = 0.5
-segments = 5
-segment_height = 0.5
+vertices_per_circle = 30
+circle_radius = 0.25
+segments = 20
+length = 4.0
+segment_height = length / segments
 
 # ...and data derived from it
 num_rows = (vertices_per_circle + 1) * (segments + 1)
@@ -40,7 +41,7 @@ num_tris = segments * (vertices_per_circle - 1) * 2
 # Setting up the columns for our vertex data.
 v_array_format = GeomVertexArrayFormat()
 v_array_format.add_column(InternalName.get_vertex(),          3, Geom.NT_float32, Geom.C_point)
-v_array_format.add_column(InternalName.get_color(),           3, Geom.NT_float32, Geom.C_normal)
+v_array_format.add_column(InternalName.get_color(),           4, Geom.NT_float32, Geom.C_color)
 v_array_format.add_column(InternalName.get_transform_blend(), 1, Geom.NT_uint16,  Geom.C_index)
 
 # Setting up the animation.
@@ -93,7 +94,8 @@ for circle in range(segments + 1):
         local_radius = circle_radius * (1 - circle / segments)
         v_pos = reference_space.get_relative_point(turtle, Vec3(0, local_radius, 0))
         vertex.set_data3f(v_pos)
-        color.set_data4f(circle/segments, 0, vertex_in_circle/vertices_per_circle, 1)
+        #color.set_data4f(circle/segments, 0, vertex_in_circle/vertices_per_circle, 1)
+        color.set_data4f(vertex_in_circle % 2, circle % 2, 0, 1)
         # ...and create the transform blend table entry and reference it, ...
         blend = TransformBlend()
         blend.add_transform(JointVertexTransform(joint), weight=1)
@@ -132,22 +134,30 @@ actor = Actor(character_np)
 # Application
 #
 
+max_angle = 90.0*2
+side_phases = 1.5
+front_phases = 0.7
+
 import sys
+from math import pi
 from math import sin
 from direct.showbase.ShowBase import ShowBase
 
 ShowBase()
 base.accept('escape', sys.exit)
-base.cam.set_pos(0, -7, 1)
+base.cam.set_pos(0, -10, 3)
+base.cam.look_at(0, 0, 2.5)
 
 actor.reparent_to(base.render)
 joints = [actor.control_joint(None, "modelRoot", f"joint_{i}") for i in range(1, segments)]
 
-max_angle = 20.0
-
 def undulate_tentacle(task):
     for j_idx, j_node in enumerate(joints):
-        j_node.set_r(sin(task.time) * max_angle)
+        side_phase_offset = side_phases / (segments - 1) * j_idx * 2 * pi
+        front_phase_offset = front_phases / (segments - 1) * j_idx * 2 * pi
+        #j_node.set_r(sin(task.time) * max_angle / (segments - 1))
+        j_node.set_r(sin(task.time + side_phase_offset) * max_angle / (segments - 1))
+        #j_node.set_p(sin(task.time + front_phase_offset) * max_angle / (segments - 1))
     return task.cont
 
 base.task_mgr.add(undulate_tentacle)
