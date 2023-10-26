@@ -133,16 +133,22 @@ actor = Actor(character_np)
 #
 
 import sys
+from math import sin
 from direct.showbase.ShowBase import ShowBase
 
 ShowBase()
 base.accept('escape', sys.exit)
-
-actor.reparent_to(base.render)
-base.render.ls()
-controlled_joint = actor.control_joint(None, "modelRoot", "joint_2")
-controlled_joint.set_r(30)
-
 base.cam.set_pos(0, -7, 1)
 
+actor.reparent_to(base.render)
+joints = [actor.control_joint(None, "modelRoot", f"joint_{i}") for i in range(1, segments)]
+
+max_angle = 20.0
+
+def undulate_tentacle(task):
+    for j_idx, j_node in enumerate(joints):
+        j_node.set_r(sin(task.time) * max_angle)
+    return task.cont
+
+base.task_mgr.add(undulate_tentacle)
 base.run()
