@@ -1,3 +1,8 @@
+# Now that we have the code to generate a tentacle model with joints, we
+# do of course still need to make it move. For this example, we will
+# take direct control of the joints and rotate them so as to make the
+# tentacle flail around wildly.
+
 import sys
 from math import pi
 from math import sin
