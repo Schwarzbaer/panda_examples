@@ -35,7 +35,7 @@ from direct.actor.Actor import Actor
 # First, some user-provided values to fiddle with.
 vertices_per_circle = 30
 circle_radius = 0.25
-segments = 20
+segments = 40
 length = 4.0
 
 # ...and data derived from it

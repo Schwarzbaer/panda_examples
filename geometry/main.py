@@ -1,4 +1,7 @@
-# 
+# This program places the model created in `basic_model.py` into a scene
+# so that we can actually see it, and animates it a little by moving it
+# around. Not much of interest can be learned here, but it serves as a
+# basis for later elaborations.
 
 import sys
 from math import pi
