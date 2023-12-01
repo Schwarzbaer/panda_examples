@@ -31,6 +31,7 @@ from panda3d.core import PNMImage
 from panda3d.core import PfmFile
 from panda3d.core import TextureStage
 from panda3d.core import Texture
+from panda3d.core import LColor
 
 from direct.showbase.ShowBase import ShowBase
 
@@ -70,7 +71,7 @@ image_out.clear(
     y_size=resolution,
     num_channels=4,
 )
-image_out.fill(Vec4(0, 0, 0, 0))  # Right now, this texture is black.
+image_out.fill(Vec4(0, 0, 0, 1))  # Right now, this texture is black.
 texture_out = Texture('')
 texture_out.setup_2d_texture(
     image_out.get_x_size(),
@@ -137,23 +138,27 @@ base.graphicsEngine.dispatch_compute(
     sattr,
     base.win.get_gsg(),
 )
+
 # Since right here and now we *aren't* rendering a frame at all, I am
 # utterly clueless on whether the shader will be run before or after the
 # first frame, and I also don't know how to get the data from the GPU
 # back into the texture. I mean, we know that it works because the quad
 # on the screen is green, but where is the data to prove it?
+# Well, here:
+c = LColor(0, 0, 0, 0)
+texture_out.peek().fetch_pixel(c, 0, 0)
+print(f"Texture color: {c}")
+print(f"Image color  : {image_out.get_point(0, 0)}")
+print(f"Extracting texture data...")
+base.graphicsEngine.extract_texture_data(texture_out, base.win.get_gsg())
+texture_out.peek().fetch_pixel(c, 0, 0)
+print(f"Texture color: {c}")
+print(f"Image color  : {image_out.get_point(0, 0)}")
+print(f"Storing texture to image...")
+texture_out.store(image_out)
+print(f"Texture color: {c}")
+print(f"Image color  : {image_out.get_point(0, 0)}")
 
-def print_image_data(first_frame=False):
-    if first_frame:
-        print("Initial frame")
-    else:
-        print("Invoked frame")
-    from panda3d.core import LColor
-    c = LColor(0, 0, 0, 0)
-    texture_out.peek().fetch_pixel(c, 0, 0)
-    print(c)
-    texture_out.store(image_out)
-    print(image_out.get_point(0, 0))
-base.accept("1", print_image_data)
-print_image_data(True)
+# ...and now you know to run compute shaders, and get data onto the GPU,
+# and back down again. Have fun!
 base.run()
